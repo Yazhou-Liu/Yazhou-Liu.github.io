@@ -7,7 +7,7 @@ title: 落花流水
 subtitle:
 description: 花自飘零，水自流。
 author: 落花流水
-language: zh-CN
+language: zh-Hans
 timezone: Asia/Shanghai
 
 # URL
@@ -25,7 +25,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: README.md
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -78,5 +78,27 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:Yazhou-Liu/Yazhou-Liu.github.io.git
+  repo: https://github.com/Yazhou-Liu/Yazhou-Liu.github.io.git
   branch: master
+
+#search
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+#RSS订阅
+plugin:
+- hexo-generator-feed
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+#live2D
+live2d:
+  model: hijiki
+  bottom: -30
+
