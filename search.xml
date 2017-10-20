@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[又建博客]]></title>
-    <url>%2F2017%2F10%2F20%2F%E5%8F%88%E5%BB%BA%E5%8D%9A%E5%AE%A2%2F</url>
-    <content type="text"><![CDATA[这是第二次建博客，第一次大概实在一年前，也是十月份左右。当时我还在读研，一边在做Research Project，一遍在自学Machine Learning。突然灵光一现想要做个自己博客，又觉得用网上的模板有点low，不符合我技术宅的气质，但html好像又没学过。于是就找到了Hexo这个操作简单，外观看起来不错的工具。想着能记录日常逗逼生活和学习笔记来着，结果写了两篇就不了了之，更是在后面整理Thesis Project的时候连带源文件和备份一起删了。这就导致了现在我又要花两天功夫重新做一个。虽然用的同样是Github Page + Hexo这样的简单结构，连域名都没钱买。但是这次遇到的问题竟然比第一次还多，甚至又让我重装了一遍Ubuntu。最后总算以解决了大部分问题，留下一部分问题以后解决，跳过了少数问题的状态开始写现在这篇博客。希望这次的博客不要像第一次一样短命，能长久的写下去，毕竟人总要进步嘛。]]></content>
-      <categories>
-        <category>杂记</category>
-      </categories>
-      <tags>
-        <tag>杂记</tag>
-      </tags>
-  </entry>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[又建博客]]></title>
+      <url>/2017/10/20/%E5%8F%88%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+      <content type="html"><![CDATA[<p>这是第二次建博客，第一次大概实在一年前，也是十月份左右。当时我还在读研，一边在做Research Project，一遍在自学Machine Learning。突然灵光一现想要做个自己博客，又觉得用网上的模板有点low，不符合我技术宅的气质，但html好像又没学过。于是就找到了Hexo这个操作简单，外观看起来不错的工具。想着能记录日常逗逼生活和学习笔记来着，结果写了两篇就不了了之，更是在后面整理Thesis Project的时候连带源文件和备份一起删了。这就导致了现在我又要花两天功夫重新做一个。虽然用的同样是Github Page + Hexo这样的简单结构，连域名都没钱买。但是这次遇到的问题竟然比第一次还多，甚至又让我重装了一遍Ubuntu。最后总算以解决了大部分问题，留下一部分问题以后解决，跳过了少数问题的状态开始写现在这篇博客。希望这次的博客不要像第一次一样短命，能长久的写下去，毕竟人总要进步嘛。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 杂记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 杂记 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
 </search>
