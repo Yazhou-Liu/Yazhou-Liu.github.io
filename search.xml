@@ -1,93 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[Linux下profile,bash_profile和bashrc的区别]]></title>
-      <url>/2017/10/22/Linux%E4%B8%8Bprofile-bash-profile%E5%92%8Cbashrc%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-      <content type="html"></content>
-      
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Github+Hexo 博客搭建]]></title>
-      <url>/2017/10/21/Github-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
-      <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>关于 Github+Hexo 搭建博客的优点网上已经有很多相关的介绍，总结起来就是入门简单，操作方便，简介美观，可扩展性较强等。本文主要介绍 Ubuntu 环境下基于 Github+Hexo 的博客搭建，以及在搭建过程中遇到的问题和解决方法。</p>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>准备工作主要包括 Node.js 和 Git 的安装，以及 Github 账号的注册，账号注册在这里就不赘述了，具体参考 <a href="https://github.com" target="_blank" rel="external">Github</a>。</p>
-<h4 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h4><p>Hexo 是基于 node.js 环境的静态博客，因为 Ubuntu 的软件库中的 node.js 版本较低，不符合 Hexo 的最低要求，所以这里推荐官方的安装方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -</div><div class="line">$ sudo apt-get install -y nodejs</div></pre></td></tr></table></figure></p>
-<p>当然官方也给出了其他系统的安装方法，具体参考 <a href="https://nodejs.org/en/download/package-manager/#smartos-and-illumos" target="_blank" rel="external">Node.js官网</a>。<br>可以通过查看版本验证是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ node -v</div><div class="line">$ nodejs -v</div><div class="line">$ npm -v</div></pre></td></tr></table></figure></p>
-<p>我在安装过程中通过其他办法安装出现过 node 和 nodejs 版本不同的情况导致 Hexo 安装失败，所以这里还是推荐官方的安装方法。</p>
-<h4 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h4><p>Git 是一个非常强大的开源版本控制系统， Ubuntu 下安装 Git 也非常容易：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install git</div></pre></td></tr></table></figure></p>
-<p>然后就是设定 Git 身份信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;your github account name&quot;</div><div class="line">$ git config --global user.email &quot;your github account email&quot;</div></pre></td></tr></table></figure></p>
-<p>最后在 Gtihub 中创建一个 repo，名称为 <code>yourname.github.io</code>, 其中 yourname 是你的 github 名称。这个 repo 就是后面博客文件的存放位置。</p>
-<h3 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h3><p>剩下的就是博客搭建了，Hexo 在博客的搭建和维护上都非常方便。</p>
-<h4 id="安装和初始化-Hexo"><a href="#安装和初始化-Hexo" class="headerlink" title="安装和初始化 Hexo"></a>安装和初始化 Hexo</h4><p>执行下面命令来安装 Hexo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<p>如果之前的 Node.js 版本有问题，这里的 Hexo 会安装失败。安装完成后，为你的博客创建一个文件夹并执行以下命令来初始化你的博客：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ cd &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure></p>
-<p>新建完成后，指定文件夹的目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml    \\博客配置文件</div><div class="line">├── package.json   \\模块版本信息</div><div class="line">├── scaffolds      \\文章等的模板</div><div class="line">├── source         \\文章</div><div class="line">└── themes         \\主题</div></pre></td></tr></table></figure></p>
-<h4 id="生成SSH并添加到GitHub"><a href="#生成SSH并添加到GitHub" class="headerlink" title="生成SSH并添加到GitHub"></a>生成SSH并添加到GitHub</h4><p>在自己电脑上生成本地 SSH，然后找到 <code>id_rsa.pub</code> 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;youremail@example.com</div><div class="line">$ cat id_rsa.pub</div></pre></td></tr></table></figure></p>
-<p>将文件内容保存到你的 Github 中，具体可以参考 <a href="https://segmentfault.com/a/1190000002645623" target="_blank" rel="external">git-ssh 配置和使用</a>。<br>验证是否添加成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
-<h4 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h4><p>进入博客的文件夹，输入以下指令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div><div class="line">$ hexo server</div></pre></td></tr></table></figure></p>
-<p>打开浏览器输入 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>,你就可以看到你的博客了。<br>安装<code>hexo-deployer-git</code>，用来将博客上传到 Github:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
-<p>然后执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
-<p>在浏览器中输入 <code>http://yourgithubname.github.io</code> 就可以看到你的博客了。<br>通常 <code>hexo server</code> 用于本地调制，<code>hexo deploy</code> 用于发布最终版本。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="主题和美化"><a href="#主题和美化" class="headerlink" title="主题和美化"></a>主题和美化</h4><p>Hexo 有很多主题可供选择，我用的是 Next 主题，Next 主题是一个比较成熟的主题，里面集成了很多插件和功能，外观也比较简洁美观。主题的安装和美化具体可以参考 <a href="http://theme-next.iissnan.com/" target="_blank" rel="external">Next的中文文档</a>。但是这个文档有些内容已经不适合最新的版本，关于文档之外的美化和插件我会在另一篇文章中介绍。</p>
-<h4 id="备份和恢复"><a href="#备份和恢复" class="headerlink" title="备份和恢复"></a>备份和恢复</h4><p>因为 Hexo 源文件在本地，很多人会遇到换电脑时的博客的备份和回复问题。这里有一个非常好用的解决方案就是用 Git 来实现备份和恢复。具体方法如下：</p>
-<h5 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h5><ol>
-<li>创建仓库：<code>yourname.github.io</code></li>
-<li>创建两个分支：master 与 hexo</li>
-<li>设置 hexo 为默认分支（因为我们只需要手动管理这个分支上的Hexo源文件）</li>
-<li>在本地博客文件夹建立仓库 <code>git init</code></li>
-<li>关联 Github 仓库<br><code>git remote add origin git@github.com:yourname/yourname.github.io.git</code></li>
-<li>依次执行 <code>git add .</code>、<code>git commit -m “…”</code>、<code>git push origin hexo</code> 备份Hexo源文件<br>执行 <code>hexo generate -d</code> 生成网站并部署到 GitHub 上</li>
-</ol>
-<p>这样一来，在 GitHub 上的 <code>yourname.github.io</code> 仓库就有两个分支，一个 hexo 分支用来存放网站的原始文件，一个 master 分支用来存放生成的静态网页。完美( •̀ ω •́ )y！</p>
-<h5 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h5><ol>
-<li>使用 <code>git clone git@github.com:yourname/yourname.github.io.git</code> 拷贝仓库（默认分支为 hexo）</li>
-</ol>
-<h4 id="Hexo-常用命令："><a href="#Hexo-常用命令：" class="headerlink" title="Hexo 常用命令："></a>Hexo 常用命令：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1.生成静态页面：</div><div class="line">$ hexo generate</div><div class="line">2.本地预览：</div><div class="line">$ hexo server或 hexo s  //然后打开浏览器输入localhost:4000可以预览博客效果，用于调试</div><div class="line">3. 新建文章</div><div class="line">$ hexo new post &quot;title&quot; //新文章位置：/source/_posts</div><div class="line">4. 新建页面</div><div class="line">$ hexo new page &quot;title&quot;</div><div class="line">5. 部署并生成</div><div class="line">$ hexo d -g</div><div class="line">6. 清除生成的文件和缓存</div><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
-]]></content>
-      
-        <categories>
-            
-            <category> 博客搭建 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-            <tag> Next </tag>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[又建博客]]></title>
-      <url>/2017/10/20/%E5%8F%88%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-      <content type="html"><![CDATA[<p>这是第三次建博客，上一次大概实在一年前，也是十月份左右。当时我还在读研，一边在做Research Project，一遍在自学Machine Learning。突然灵光一现又想要做个自己博客，又觉得之前用网上的模板有点low，不符合我技术宅的气质，但html好像又没学过。于是就找到了Hexo这个操作简单，外观看起来不错的工具。想着能记录日常逗逼生活和学习笔记来着，结果写了两篇就不了了之，更是在后面整理Thesis Project的时候连带源文件和备份一起删了。这就导致了现在我又要花半天功夫重新做一个。虽然用的同样是Github Page + Hexo这样的简单结构，连域名都没钱买。但是这次遇到的问题竟然比第一次还多，甚至又让我重装了一遍Ubuntu。最后总算以解决了大部分问题，留下一部分问题以后解决，跳过了少数问题的状态开始写现在这篇博客。希望这次的博客不要像第一次一样短命，能长久的写下去，毕竟人总要进步嘛。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 杂记 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 杂记 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[Linux下profile,bash_profile和bashrc的区别]]></title>
+    <url>%2F2017%2F10%2F22%2FLinux%E4%B8%8Bprofile-bash-profile%E5%92%8Cbashrc%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[前言在一般的 linux 或者 unix 系统中， 都可以通过编辑 bashrc 和 profile 来设置用户的工作环境，本文将介绍他们之间的不同和联系。 一般的系统可能会有一下四个系统文件： /etc/profile /etc/bashrc ~/.bashrc ~/.profile 而如果系统是 ubuntu 或者 debian 的话， 就不会有 /etc/bashrc 而会有 /etc/bash.bashrc 文件。 Shell 的分类系统的 shell 有很多种， 比如 bash, sh, zsh 之类的， 如果要查看某一个用户使用的是什么 shell 可以通过 finger [USERNAME] 命令来查看。我们这里只说 shell 是 bash 的情况，因为 bash 最常用，而且如果是 sh 或者其他 shell 显然不会运行 bashrc 的。 login shell 和 no-login shell“login shell” 代表用户登入， 比如使用 “su -“ 命令, 或者用 ssh 连接到某一个服务器上， 都会使用该用户默认 shell 启动 login shell 模式。 该模式下的 shell 会去自动执行 /etc/profile 和 ~/.profile 文件， 但不会执行任何的 bashrc 文件， 所以一般再 /etc/profile 或者 ~/.profile 里我们会手动去 source bashrc 文件。 而 no-login shell 的情况是我们在终端下直接输入 bash 或者 bash -c “CMD” 来启动的 shell。 该模式下是不会自动去运行任何的 profile 文件。 interactive shell 和 non-interactive shellinteractive shell 是交互式shell, 顾名思义就是用来和用户交互的， 提供了命令提示符可以输入命令。 该模式下会存在一个叫 PS1 的环境变量， 如果还不是 login shell 的则会去 source /etc/bash.bashrc 和 ~/.bashrc 文件 non-interactive shell 则一般是通过 bash -c “CMD” 来执行的bash。 该模式下不会执行任何的 rc 文件， 不过还存在一种特殊情况这个我之后详细讲述。 在可能存在的模式组合中 RC 文件的执行SSH login, sudo su - [USER] 或者 mac 下开启终端ssh 登入和 su - 是典型的 interactive login shell， 所以会有 PS1 变量， 并且会执行： /etc/profile ~/.profile 在命令提示符状态下输入 bash 或者 ubuntu 默认设置下打开终端这样开启的是 interactive no-login shell， 所以会有 PS1 变量， 只会执行： /etc/bash.bashrc ~/.bashrc 通过 bash -c “CMD” 或者 bash BASHFILE 命令执行的 shell这些命令什么都不会执行， 也就是设置 PS1 变量， 不执行任何 RC 文件。 通过 “ssh server CMD” 执行的命令 或 通过程序执行远程的命令这是最特殊的一种模式， 理论上应该既是 非交互 也是 非登入的， 但是实际上他不会设置 PS1, 但是还会执行 /etc/bash.bashrc bashrc 这里还有一点值得注意的是 /etc/bashrc 任何情况下都不会执行。 bashrc 和 profile 的区别profileprofile 是某个用户唯一的用来设置环境变量的地方， 因为用户可以有多个 shell 比如 bash， sh， zsh 之类的， 但像环境变量这种其实只需要在统一的一个地方初始化就可以了， 而这就是 profile。当用户登录时，该文件仅仅执行一次。 bashrc用来给 bash 做初始化的比如用来初始化 bash 的设置， bash 的代码补全， bash 的别名， bash 的颜色。 以此类推也就还会有 shrc， zshrc 这样的文件存在了， 只是 bash 太常用了而已。bash shell被打开时，该文件被读取。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Github+Hexo 博客搭建]]></title>
+    <url>%2F2017%2F10%2F21%2FGithub-Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[前言关于 Github+Hexo 搭建博客的优点网上已经有很多相关的介绍，总结起来就是入门简单，操作方便，简介美观，可扩展性较强等。本文主要介绍 Ubuntu 环境下基于 Github+Hexo 的博客搭建，以及在搭建过程中遇到的问题和解决方法。 准备工作准备工作主要包括 Node.js 和 Git 的安装，以及 Github 账号的注册，账号注册在这里就不赘述了，具体参考 Github。 安装 Node.jsHexo 是基于 node.js 环境的静态博客，因为 Ubuntu 的软件库中的 node.js 版本较低，不符合 Hexo 的最低要求，所以这里推荐官方的安装方法：12$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -$ sudo apt-get install -y nodejs 当然官方也给出了其他系统的安装方法，具体参考 Node.js官网。可以通过查看版本验证是否安装成功：123$ node -v$ nodejs -v$ npm -v 我在安装过程中通过其他办法安装出现过 node 和 nodejs 版本不同的情况导致 Hexo 安装失败，所以这里还是推荐官方的安装方法。 安装 GitGit 是一个非常强大的开源版本控制系统， Ubuntu 下安装 Git 也非常容易：1$ sudo apt-get install git 然后就是设定 Git 身份信息：12$ git config --global user.name &quot;your github account name&quot;$ git config --global user.email &quot;your github account email&quot; 最后在 Gtihub 中创建一个 repo，名称为 yourname.github.io, 其中 yourname 是你的 github 名称。这个 repo 就是后面博客文件的存放位置。 搭建博客剩下的就是博客搭建了，Hexo 在博客的搭建和维护上都非常方便。 安装和初始化 Hexo执行下面命令来安装 Hexo:1$ npm install -g hexo-cli 如果之前的 Node.js 版本有问题，这里的 Hexo 会安装失败。安装完成后，为你的博客创建一个文件夹并执行以下命令来初始化你的博客：123$ hexo init &lt;folder&gt;$ cd &lt;folder&gt;$ npm install 新建完成后，指定文件夹的目录如下：123456.├── _config.yml \\博客配置文件├── package.json \\模块版本信息├── scaffolds \\文章等的模板├── source \\文章└── themes \\主题 生成SSH并添加到GitHub在自己电脑上生成本地 SSH，然后找到 id_rsa.pub 文件：12$ ssh-keygen -t rsa -C &quot;youremail@example.com$ cat id_rsa.pub 将文件内容保存到你的 Github 中，具体可以参考 git-ssh 配置和使用。验证是否添加成功：1ssh -T git@github.com 部署博客进入博客的文件夹，输入以下指令：123$ hexo clean$ hexo generate$ hexo server 打开浏览器输入 http://localhost:4000,你就可以看到你的博客了。安装hexo-deployer-git，用来将博客上传到 Github:1$ npm install hexo-deployer-git --save 然后执行：123$ hexo clean$ hexo generate$ hexo deploy 在浏览器中输入 http://yourgithubname.github.io 就可以看到你的博客了。通常 hexo server 用于本地调制，hexo deploy 用于发布最终版本。 其他主题和美化Hexo 有很多主题可供选择，我用的是 Next 主题，Next 主题是一个比较成熟的主题，里面集成了很多插件和功能，外观也比较简洁美观。主题的安装和美化具体可以参考 Next的中文文档。但是这个文档有些内容已经不适合最新的版本，关于文档之外的美化和插件我会在另一篇文章中介绍。 备份和恢复因为 Hexo 源文件在本地，很多人会遇到换电脑时的博客的备份和回复问题。这里有一个非常好用的解决方案就是用 Git 来实现备份和恢复。具体方法如下： 备份 创建仓库：yourname.github.io 创建两个分支：master 与 hexo 设置 hexo 为默认分支（因为我们只需要手动管理这个分支上的Hexo源文件） 在本地博客文件夹建立仓库 git init 关联 Github 仓库git remote add origin git@github.com:yourname/yourname.github.io.git 依次执行 git add .、git commit -m “…”、git push origin hexo 备份Hexo源文件执行 hexo generate -d 生成网站并部署到 GitHub 上 这样一来，在 GitHub 上的 yourname.github.io 仓库就有两个分支，一个 hexo 分支用来存放网站的原始文件，一个 master 分支用来存放生成的静态网页。完美( •̀ ω •́ )y！ 恢复 使用 git clone git@github.com:yourname/yourname.github.io.git 拷贝仓库（默认分支为 hexo） Hexo 常用命令：1234567891011121.生成静态页面：$ hexo generate2.本地预览：$ hexo server或 hexo s //然后打开浏览器输入localhost:4000可以预览博客效果，用于调试3. 新建文章$ hexo new post &quot;title&quot; //新文章位置：/source/_posts4. 新建页面$ hexo new page &quot;title&quot;5. 部署并生成$ hexo d -g6. 清除生成的文件和缓存$ hexo clean]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[又建博客]]></title>
+    <url>%2F2017%2F10%2F20%2F%E5%8F%88%E5%BB%BA%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[这是第三次建博客，上一次大概实在一年前，也是十月份左右。当时我还在读研，一边在做Research Project，一遍在自学Machine Learning。突然灵光一现又想要做个自己博客，又觉得之前用网上的模板有点low，不符合我技术宅的气质，但html好像又没学过。于是就找到了Hexo这个操作简单，外观看起来不错的工具。想着能记录日常逗逼生活和学习笔记来着，结果写了两篇就不了了之，更是在后面整理Thesis Project的时候连带源文件和备份一起删了。这就导致了现在我又要花半天功夫重新做一个。虽然用的同样是Github Page + Hexo这样的简单结构，连域名都没钱买。但是这次遇到的问题竟然比第一次还多，甚至又让我重装了一遍Ubuntu。最后总算以解决了大部分问题，留下一部分问题以后解决，跳过了少数问题的状态开始写现在这篇博客。希望这次的博客不要像第一次一样短命，能长久的写下去，毕竟人总要进步嘛。]]></content>
+      <categories>
+        <category>杂记</category>
+      </categories>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
 </search>

@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Linux,Ubuntu," />
 
 
 
@@ -132,17 +132,18 @@
 
 
 
-<meta name="description" content="花自飘零，水自流。">
+<meta name="description" content="前言在一般的 linux 或者 unix 系统中， 都可以通过编辑 bashrc 和 profile 来设置用户的工作环境，本文将介绍他们之间的不同和联系。 一般的系统可能会有一下四个系统文件： /etc/profile /etc/bashrc ~/.bashrc ~/.profile 而如果系统是 ubuntu 或者 debian 的话， 就不会有 /etc/bashrc 而会有 /etc/ba">
+<meta name="keywords" content="Linux,Ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下profile,bash_profile和bashrc的区别">
 <meta property="og:url" content="http://yoursite.com/2017/10/22/Linux下profile-bash-profile和bashrc的区别/index.html">
 <meta property="og:site_name" content="落花流水">
-<meta property="og:description" content="花自飘零，水自流。">
+<meta property="og:description" content="前言在一般的 linux 或者 unix 系统中， 都可以通过编辑 bashrc 和 profile 来设置用户的工作环境，本文将介绍他们之间的不同和联系。 一般的系统可能会有一下四个系统文件： /etc/profile /etc/bashrc ~/.bashrc ~/.profile 而如果系统是 ubuntu 或者 debian 的话， 就不会有 /etc/bashrc 而会有 /etc/ba">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-22T00:41:49.148Z">
+<meta property="og:updated_time" content="2017-10-22T01:52:29.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下profile,bash_profile和bashrc的区别">
-<meta name="twitter:description" content="花自飘零，水自流。">
+<meta name="twitter:description" content="前言在一般的 linux 或者 unix 系统中， 都可以通过编辑 bashrc 和 profile 来设置用户的工作环境，本文将介绍他们之间的不同和联系。 一般的系统可能会有一下四个系统文件： /etc/profile /etc/bashrc ~/.bashrc ~/.profile 而如果系统是 ubuntu 或者 debian 的话， 就不会有 /etc/bashrc 而会有 /etc/ba">
 
 
 
@@ -409,6 +410,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -457,7 +480,29 @@
       
 
       
-        
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在一般的 linux 或者 unix 系统中， 都可以通过编辑 bashrc 和 profile 来设置用户的工作环境，本文将介绍他们之间的不同和联系。 一般的系统可能会有一下四个系统文件：</p>
+<p>/etc/profile</p>
+<p>/etc/bashrc</p>
+<p>~/.bashrc</p>
+<p>~/.profile</p>
+<p>而如果系统是 ubuntu 或者 debian 的话， 就不会有 /etc/bashrc 而会有 /etc/bash.bashrc 文件。</p>
+<h3 id="Shell-的分类"><a href="#Shell-的分类" class="headerlink" title="Shell 的分类"></a>Shell 的分类</h3><p>系统的 shell 有很多种， 比如 bash, sh, zsh 之类的， 如果要查看某一个用户使用的是什么 shell 可以通过 <code>finger [USERNAME]</code> 命令来查看。我们这里只说 shell 是 bash 的情况，因为 bash 最常用，而且如果是 sh 或者其他 shell 显然不会运行 bashrc 的。</p>
+<h4 id="login-shell-和-no-login-shell"><a href="#login-shell-和-no-login-shell" class="headerlink" title="login shell 和 no-login shell"></a>login shell 和 no-login shell</h4><p>“login shell” 代表用户登入， 比如使用 “su -“ 命令, 或者用 ssh 连接到某一个服务器上， 都会使用该用户默认 shell 启动 login shell 模式。 该模式下的 shell 会去自动执行 /etc/profile 和 ~/.profile 文件， 但不会执行任何的 bashrc 文件， 所以一般再 /etc/profile 或者 ~/.profile 里我们会手动去 source bashrc 文件。 而 no-login shell 的情况是我们在终端下直接输入 bash 或者 bash -c “CMD” 来启动的 shell。 该模式下是不会自动去运行任何的 profile 文件。</p>
+<h4 id="interactive-shell-和-non-interactive-shell"><a href="#interactive-shell-和-non-interactive-shell" class="headerlink" title="interactive shell 和 non-interactive shell"></a>interactive shell 和 non-interactive shell</h4><p>interactive shell 是交互式shell, 顾名思义就是用来和用户交互的， 提供了命令提示符可以输入命令。 该模式下会存在一个叫 PS1 的环境变量， 如果还不是 login shell 的则会去 source /etc/bash.bashrc 和 ~/.bashrc 文件 non-interactive shell 则一般是通过 bash -c “CMD” 来执行的bash。 该模式下不会执行任何的 rc 文件， 不过还存在一种特殊情况这个我之后详细讲述。</p>
+<h4 id="在可能存在的模式组合中-RC-文件的执行"><a href="#在可能存在的模式组合中-RC-文件的执行" class="headerlink" title="在可能存在的模式组合中 RC 文件的执行"></a>在可能存在的模式组合中 RC 文件的执行</h4><h5 id="SSH-login-sudo-su-USER-或者-mac-下开启终端"><a href="#SSH-login-sudo-su-USER-或者-mac-下开启终端" class="headerlink" title="SSH login, sudo su - [USER] 或者 mac 下开启终端"></a>SSH login, sudo su - [USER] 或者 mac 下开启终端</h5><p>ssh 登入和 su - 是典型的 interactive login shell， 所以会有 PS1 变量， 并且会执行：</p>
+<p>/etc/profile</p>
+<p>~/.profile</p>
+<h5 id="在命令提示符状态下输入-bash-或者-ubuntu-默认设置下打开终端"><a href="#在命令提示符状态下输入-bash-或者-ubuntu-默认设置下打开终端" class="headerlink" title="在命令提示符状态下输入 bash 或者 ubuntu 默认设置下打开终端"></a>在命令提示符状态下输入 bash 或者 ubuntu 默认设置下打开终端</h5><p>这样开启的是 interactive no-login shell， 所以会有 PS1 变量， 只会执行：</p>
+<p>/etc/bash.bashrc</p>
+<p>~/.bashrc</p>
+<h5 id="通过-bash-c-“CMD”-或者-bash-BASHFILE-命令执行的-shell"><a href="#通过-bash-c-“CMD”-或者-bash-BASHFILE-命令执行的-shell" class="headerlink" title="通过 bash -c “CMD” 或者 bash BASHFILE 命令执行的 shell"></a>通过 bash -c “CMD” 或者 bash BASHFILE 命令执行的 shell</h5><p>这些命令什么都不会执行， 也就是设置 PS1 变量， 不执行任何 RC 文件。</p>
+<h5 id="通过-“ssh-server-CMD”-执行的命令-或-通过程序执行远程的命令"><a href="#通过-“ssh-server-CMD”-执行的命令-或-通过程序执行远程的命令" class="headerlink" title="通过 “ssh server CMD” 执行的命令 或 通过程序执行远程的命令"></a>通过 “ssh server CMD” 执行的命令 或 通过程序执行远程的命令</h5><p>这是最特殊的一种模式， 理论上应该既是 非交互 也是 非登入的， 但是实际上他不会设置 PS1, 但是还会执行</p>
+<p>/etc/bash.bashrc</p>
+<p>bashrc</p>
+<p>这里还有一点值得注意的是 /etc/bashrc 任何情况下都不会执行。</p>
+<h3 id="bashrc-和-profile-的区别"><a href="#bashrc-和-profile-的区别" class="headerlink" title="bashrc 和 profile 的区别"></a>bashrc 和 profile 的区别</h3><h4 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h4><p>profile 是某个用户唯一的用来设置环境变量的地方， 因为用户可以有多个 shell 比如 bash， sh， zsh 之类的， 但像环境变量这种其实只需要在统一的一个地方初始化就可以了， 而这就是 profile。当用户登录时，该文件仅仅执行一次。</p>
+<h4 id="bashrc"><a href="#bashrc" class="headerlink" title="bashrc"></a>bashrc</h4><p>用来给 bash 做初始化的比如用来初始化 bash 的设置， bash 的代码补全， bash 的别名， bash 的颜色。 以此类推也就还会有 shrc， zshrc 这样的文件存在了， 只是 bash 太常用了而已。bash shell被打开时，该文件被读取。 </p>
+
       
     </div>
     
@@ -471,6 +516,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"> <i class="fa fa-tag"></i> Linux</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag"> <i class="fa fa-tag"></i> Ubuntu</a>
+          
+        </div>
       
 
       
@@ -548,8 +601,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -579,7 +641,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -590,7 +652,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -636,6 +698,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-的分类"><span class="nav-number">2.</span> <span class="nav-text">Shell 的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#login-shell-和-no-login-shell"><span class="nav-number">2.1.</span> <span class="nav-text">login shell 和 no-login shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#interactive-shell-和-non-interactive-shell"><span class="nav-number">2.2.</span> <span class="nav-text">interactive shell 和 non-interactive shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在可能存在的模式组合中-RC-文件的执行"><span class="nav-number">2.3.</span> <span class="nav-text">在可能存在的模式组合中 RC 文件的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SSH-login-sudo-su-USER-或者-mac-下开启终端"><span class="nav-number">2.3.1.</span> <span class="nav-text">SSH login, sudo su - [USER] 或者 mac 下开启终端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在命令提示符状态下输入-bash-或者-ubuntu-默认设置下打开终端"><span class="nav-number">2.3.2.</span> <span class="nav-text">在命令提示符状态下输入 bash 或者 ubuntu 默认设置下打开终端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过-bash-c-“CMD”-或者-bash-BASHFILE-命令执行的-shell"><span class="nav-number">2.3.3.</span> <span class="nav-text">通过 bash -c “CMD” 或者 bash BASHFILE 命令执行的 shell</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过-“ssh-server-CMD”-执行的命令-或-通过程序执行远程的命令"><span class="nav-number">2.3.4.</span> <span class="nav-text">通过 “ssh server CMD” 执行的命令 或 通过程序执行远程的命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bashrc-和-profile-的区别"><span class="nav-number">3.</span> <span class="nav-text">bashrc 和 profile 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#profile"><span class="nav-number">3.1.</span> <span class="nav-text">profile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bashrc"><span class="nav-number">3.2.</span> <span class="nav-text">bashrc</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
